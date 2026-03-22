@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WNN</title>
+    <link rel="stylesheet" href="fut.css">
+</head>
+<body>
+    <header>
+        <h1>Futebol</h1>
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="esportes.html">Esportes</a>
+        <a href="mundo.html">Mundo</a>
+    </nav>
+
+    <nav class="sub-nav">
+        <a href="f1.html" class="sub-link">Formula 1</a>
+        <a href="fut.html" class="sub-link">Futebol</a>
+        <a href="ufc.html" class="sub-link">UFC</a>
+    </nav>
+    </header>
+    <h1 class="titulo">Sobre o Futebol</h1>
+    <div class="text">
+        <img src="futebol.jpg" alt="Futebol" class="fut">
+        <p> O futebol é um esporte coletivo jogado entre duas equipes de onze jogadores cada, com o objetivo de marcar gols chutando uma bola para dentro do gol adversário. É considerado o esporte mais popular do mundo, com bilhões de fãs e praticantes em todos os continentes. O futebol é conhecido por sua simplicidade, acessibilidade e capacidade de unir pessoas de diferentes culturas e origens em torno de uma paixão comum pelo jogo. O futebol é jogado em um campo retangular, com um gol em cada extremidade.</p><p>Os jogadores usam os pés para controlar a bola, realizando passes, dribles e chutes ao gol ao longo da partida. Embora os pés sejam a principal forma de domínio da bola, também é permitido utilizar outras partes do corpo, como a cabeça, o peito, as coxas e os ombros para amortecer, direcionar ou disputar a bola com os adversários durante o jogo. No entanto, o uso das mãos e dos braços é proibido para os jogadores de linha, pois isso caracteriza falta ou infração das regras da partida. A única exceção são os goleiros, que podem utilizar as mãos e os braços dentro de sua própria área para defender chutes, segurar a bola e iniciar novas jogadas para sua equipe. Essa regra é uma das características fundamentais do futebol e ajuda a diferenciar o esporte de outras modalidades que também utilizam bola.</p><p> O objetivo do jogo é marcar mais gols do que o adversário durante o tempo regulamentar, que geralmente é de 90 minutos, dividido em dois tempos de 45 minutos cada. O futebol é um esporte que exige habilidades técnicas, táticas e físicas, além de trabalho em equipe e estratégia. Os jogadores precisam ser ágeis, rápidos, habilidosos com a bola e ter uma boa visão de jogo para criar oportunidades de gol e defender sua própria meta. </p> <p>O futebol é jogado em diferentes níveis, desde partidas amadoras em campos de bairro até competições profissionais em está dios lotados. As principais competições de futebol incluem a Copa do Mundo da FIFA, a Liga dos Campeões da UEFA, a Copa Libertadores da América e os campeonatos nacionais em todo o mundo. O futebol é um esporte que transcende fronteiras e culturas, unindo pessoas de todas as idades e origens em torno de uma paixão compartilhada pelo jogo.</p>
+    </div>
+
+<h1 class="titulo">Alguns Jogadores:</h1>
+
+
+<div class="Jogadores">
+
+<div class="cdb">
+<a href="../Fut/jogadores/njr.html"><img src="neymar.jpg" alt="Neymar Jr"></a>
+<h1 class="h1">Neymar Jr</h1>
+<p>Atacante brasileiro conhecido pela habilidade, dribles e criatividade em campo.</p>
+</div>
+
+<div class="cdb">
+<a href="../Fut/jogadores/pele.html"><img src="pele.jpg" alt="Pelé"></a>
+<h1 class="h1">Pelé</h1>
+<p>Lenda do futebol brasileiro e tricampeão mundial com a seleção brasileira.</p>
+</div>
+
+<div class="cdb">
+<a href="../Fut/jogadores/cr7.html"><img src="cr7.jpg" alt="Cristiano Ronaldo"></a>
+<h1 class="h1">Cristiano Ronaldo</h1>
+<p>Um dos maiores jogadores da história do futebol, famoso pelos gols e disciplina.</p>
+</div>
+
+<div class="cdb">
+<a href="../Fut/jogadores/kj.html"><img src="k19.webp" alt="Kaio Jorge"></a>
+<h1 class="h1">Kaio Jorge</h1>
+<p>Atacante brasileiro conhecido pela movimentação e finalização.</p>
+</div>
+
+<div class="cdb">
+<img src="messi.jpg" alt="Lionel Messi">
+<h1 class="h1">Lionel Messi</h1>
+<p>Craque argentino conhecido pela visão de jogo, dribles curtos e muitos títulos.</p>
+</div>
+
+<div class="cdb">
+<img src="mbappe.webp" alt="Mbappé">
+<h1 class="h1">Kylian Mbappé</h1>
+<p>Atacante francês famoso pela velocidade e habilidade ofensiva.</p>
+</div>
+
+<div class="cdb">
+<img src="haaland.jpg" alt="Haaland">
+<h1 class="h1">Erling Haaland</h1>
+<p>Centroavante norueguês conhecido pela força física e grande número de gols.</p>
+</div>
+
+<div class="cdb">
+<img src="ronaldinho.webp" alt="Ronaldinho Gaúcho">
+<h1 class="h1">Ronaldinho Gaúcho</h1>
+<p>Ex-jogador brasileiro famoso pelo talento, dribles e alegria jogando futebol.</p>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const carrossel = document.querySelector(".Jogadores");
+
+/* duplica os jogadores para criar efeito infinito */
+carrossel.innerHTML += carrossel.innerHTML;
+
+/* movimento automático lento */
+let velocidade = 0.3;
+
+function animar(){
+    carrossel.scrollLeft += velocidade;
+
+    if(carrossel.scrollLeft >= carrossel.scrollWidth / 2){
+        carrossel.scrollLeft = 0;
+    }
+
+    requestAnimationFrame(animar);
+}
+
+animar();
+
+/* controle com scroll do mouse */
+carrossel.addEventListener("wheel", function(e){
+
+e.preventDefault();
+
+carrossel.scrollLeft += e.deltaY;
+
+});
+
+</script>
+</body>
+</html>

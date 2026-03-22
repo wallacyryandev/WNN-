@@ -1,0 +1,209 @@
+/* esportes.css - versão bonita, moderna e clean dark mode 2026 */
+
+:root {
+  --bg: #0c1117;              /* cinza-escuro suave, confortável */
+  --card-bg: #161b22;
+  --text: #c9d1d9;
+  --text-sec: #8b949e;
+  --border: #30363d;
+  --primary: #f85149;         /* vermelho vivo bonito para hover/chamadas */
+  --gray: #6e7681;
+  --accent-fut: #39d353;      /* verde futebol */
+  --accent-ufc: #f0883e;      /* laranja UFC */
+  --accent-f1: #58a6ff;       /* azul F1 */
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 1rem;
+}
+
+header {
+  background: #010409;
+  padding: 32px 0 24px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+h1 {
+  margin: 0;
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -1px;
+  text-align: center;
+}
+
+#data {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    text-transform: capitalize;
+    color: white;
+    background-color: #010409;
+    padding: 8px 14px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+nav {
+  margin: 20px 0;
+}
+
+nav a {
+  color: #8b949e;
+  text-decoration: none;
+  margin: 0 20px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+.sub-nav {
+  margin: 12px 0;
+  font-size: 0.98rem;
+}
+
+.sub-nav .sub-link {
+  color: #6e7681;
+  margin: 0 16px;
+}
+
+.sub-nav .sub-link:hover {
+  color: var(--primary);
+}
+
+/* CARROSSEL */
+
+.carrossel{
+width:100%;
+overflow:hidden;
+background:#111;
+color:white;
+padding:12px 0;
+}
+
+.ticker{
+display:flex;
+gap:40px;
+white-space:nowrap;
+animation:rolar 23s linear infinite;
+}
+
+.ticker span{
+font-weight:bold;
+font-size:16px;
+}
+
+.descricao-mundo{
+max-width:900px;
+margin:60px auto;
+padding:30px;
+background:#111;
+color:#fff;
+border-radius:10px;
+font-family:Arial, Helvetica, sans-serif;
+line-height:1.7;
+}
+
+.descricao-mundo h1{
+text-align:center;
+font-size:34px;
+margin-bottom:20px;
+border-bottom:2px solid #00aaff;
+padding-bottom:10px;
+}
+
+.descricao-mundo p{
+font-size:17px;
+margin-bottom:18px;
+text-align:justify;
+}
+
+.descricao-mundo strong{
+color:#00aaff;
+}
+
+@keyframes rolar{
+from{transform:translateX(100%)}
+to{transform:translateX(-100%)}
+}
+
+.ctt{
+position: fixed;
+bottom: 20px;
+right: 20px;
+background: linear-gradient(
+45deg,
+#f09433,
+#e6683c,
+#dc2743,
+#cc2366,
+#bc1888
+);
+color: white;
+padding: 10px 12px;
+border-radius: 50px;
+display: flex;
+align-items: center;
+cursor: pointer;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.insta{
+width: 28px;
+height: 28px;
+}
+
+.noticias-mundo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.noticias-mundo h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #58a6ff;
+}
+
+.card-noticia {
+  background: #111;
+  color: white;
+  padding: 18px;
+  border-radius: 10px;
+  transition: 0.3s;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.card-noticia:hover {
+  transform: translateY(-5px);
+}
+
+.card-noticia h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.card-noticia p {
+  font-size: 15px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.card-noticia a {
+  text-decoration: none;
+  color: #00aaff;
+  font-weight: bold;
+}

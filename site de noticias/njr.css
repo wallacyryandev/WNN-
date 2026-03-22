@@ -1,0 +1,47 @@
+body{
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    line-height: 1.6;
+}
+
+/* Cabeçalho */
+header{
+    background-color: #222;
+    color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Título */
+header h1{
+    margin: 0;
+}
+
+/* Botão voltar */
+.voltar{
+    padding: 8px 16px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.voltar:hover{
+    background-color: #ddd;
+}
+
+/* Parágrafos */
+p{
+    max-width: 900px;
+    margin: 20px auto;
+    font-size: 18px;
+    text-align: justify;
+    background-color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+}

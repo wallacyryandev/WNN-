@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="mundo.css">
+<title>WNN</title>
+</head>
+
+<body>
+
+<header>
+
+<h1>WNN</h1>
+
+<p id="data"></p>
+
+<script>
+const hoje = new Date();
+
+const dataFormatada = hoje.toLocaleDateString("pt-BR", {
+weekday: "long",
+day: "numeric",
+month: "long",
+year: "numeric"
+});
+
+document.getElementById("data").innerHTML = dataFormatada;
+</script>
+
+<nav>
+<a href="index.html">Inicio</a>
+<a href="esportes.html">Esportes</a>
+<a href="mundo.html">Mundo</a>
+
+</header>
+
+
+<div class="carrossel">
+<div class="ticker" id="cotacoes">
+<span>Carregando moedas...</span>
+</div>
+</div>
+
+
+<section class="descricao-mundo">
+
+<h1>Notícias do Mundo</h1>
+
+<p>
+A seção <strong>Notícias do Mundo</strong> do WNN reúne informações sobre os
+principais acontecimentos internacionais. Aqui são apresentados fatos relevantes
+da política global, economia internacional, avanços tecnológicos, questões
+ambientais e eventos que impactam diferentes países e sociedades.
+</p>
+
+<p>
+O objetivo dessa seção é permitir que os leitores acompanhem de forma clara e
+organizada o que está acontecendo além das fronteiras nacionais. As notícias
+exibidas são coletadas de diversas fontes públicas disponíveis na internet,
+funcionando como um sistema de <strong>agregação de notícias</strong>.
+</p>
+
+<p>
+Cada matéria mantém sua <strong>fonte original</strong>, direcionando o leitor
+para o site responsável pela publicação completa da notícia. Esse processo é
+conhecido como <strong>atribuição de fonte</strong>, uma prática utilizada para
+garantir transparência, credibilidade e reconhecimento aos veículos de
+comunicação que produziram o conteúdo jornalístico.
+</p>
+
+<p>
+Dessa forma, o WNN oferece uma visão ampla e atualizada do cenário internacional,
+permitindo que o leitor tenha acesso rápido às principais notícias do mundo em
+um único lugar.
+</p>
+
+</section>
+<h1>Ultimas Noticias Mundiais</h1>
+<div class="noticias-mundo" id="noticias-mundo"> 
+   <script>
+      async function carregarNoticiasMundo(){
+
+const container = document.getElementById("noticias-mundo");
+container.innerHTML = "<p>Carregando notícias...</p>";
+
+const feeds = [
+"https://g1.globo.com/rss/g1/mundo/",
+"https://feeds.bbci.co.uk/portuguese/rss.xml",
+"https://www.cnnbrasil.com.br/rss/"
+];
+
+let todasNoticias = [];
+
+try{
+
+const promessas = feeds.map(feed =>
+fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(feed))
+.then(res => res.text())
+.catch(() => null)
+);
+
+const respostas = await Promise.all(promessas);
+
+respostas.forEach(xmlString => {
+
+if(!xmlString) return;
+
+const parser = new DOMParser();
+const xml = parser.parseFromString(xmlString,"text/xml");
+
+const itens = xml.querySelectorAll("item");
+
+itens.forEach(item => {
+
+const titulo = item.querySelector("title")?.textContent;
+const link = item.querySelector("link")?.textContent;
+const descricao = item.querySelector("description")?.textContent
+?.replace(/<[^>]*>/g,"")
+?.substring(0,120);
+
+if(titulo && link){
+
+todasNoticias.push({
+titulo,
+link,
+descricao
+});
+
+}
+
+});
+
+});
+
+container.innerHTML = "";
+
+todasNoticias.slice(0,20).forEach(noticia => {
+
+const card = document.createElement("div");
+card.className = "card-noticia";
+
+card.innerHTML = `
+<h3>${noticia.titulo}</h3>
+<p>${noticia.descricao || "Clique para ler a notícia completa."}</p>
+<a href="${noticia.link}" target="_blank">Ler mais</a>
+`;
+
+container.appendChild(card);
+
+});
+
+}catch(erro){
+
+container.innerHTML = "<p>Erro ao carregar notícias.</p>";
+console.error(erro);
+
+}
+
+}
+
+carregarNoticiasMundo();
+setInterval(carregarNoticiasMundo,1800000);
+   </script>
+</div>
+
+<script>
+
+/* MOEDAS */
+
+async function atualizarCotacoes(){
+
+try{
+
+const resposta = await fetch("https://open.er-api.com/v6/latest/BRL")
+const dados = await resposta.json()
+
+const taxas = dados.rates
+
+let html = ""
+
+html += `<span>Dólar (USD): R$ ${(1/taxas.USD).toFixed(2)}</span>`
+html += `<span>Euro (EUR): R$ ${(1/taxas.EUR).toFixed(2)}</span>`
+html += `<span>Libra (GBP): R$ ${(1/taxas.GBP).toFixed(2)}</span>`
+html += `<span>Iene (JPY): R$ ${(1/taxas.JPY).toFixed(2)}</span>`
+html += `<span>Dólar Canadense (CAD): R$ ${(1/taxas.CAD).toFixed(2)}</span>`
+
+document.getElementById("cotacoes").innerHTML = html + html
+
+}catch{
+
+document.getElementById("cotacoes").innerHTML =
+"<span>Erro ao carregar moedas</span>"
+
+}
+
+}
+
+atualizarCotacoes()
+setInterval(atualizarCotacoes,60000)
+
+</script>
+
+
+<div class="ctt">
+<a href="https://www.instagram.com/wnnfatos/" target="_blank">
+<img src="insta.png" alt="Instagram" class="insta">
+</a>
+</div>
+
+</body>
+</html>

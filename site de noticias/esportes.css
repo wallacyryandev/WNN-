@@ -1,0 +1,286 @@
+/* esportes.css - versão bonita, moderna e clean dark mode 2026 */
+
+:root {
+  --bg: #0c1117;              /* cinza-escuro suave, confortável */
+  --card-bg: #161b22;
+  --text: #c9d1d9;
+  --text-sec: #8b949e;
+  --border: #30363d;
+  --primary: #f85149;         /* vermelho vivo bonito para hover/chamadas */
+  --gray: #6e7681;
+  --accent-fut: #39d353;      /* verde futebol */
+  --accent-ufc: #f0883e;      /* laranja UFC */
+  --accent-f1: #58a6ff;       /* azul F1 */
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 1rem;
+}
+
+header {
+  background: #010409;
+  padding: 32px 0 24px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+h1 {
+  margin: 0;
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -1px;
+}
+
+.sobre-esportes{
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 30px;
+    background: #111;
+    color: #fff;
+    border-radius: 10px;
+    line-height: 1.7;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.sobre-esportes h1{
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid #00aaff;
+    padding-bottom: 10px;
+}
+
+.sobre-esportes p{
+    font-size: 17px;
+    margin-bottom: 18px;
+    text-align: justify;
+}
+
+.sobre-esportes strong{
+    color: #00aaff;
+}
+
+nav {
+  margin: 20px 0;
+}
+
+nav a {
+  color: #8b949e;
+  text-decoration: none;
+  margin: 0 20px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+.sub-nav {
+  margin: 12px 0;
+  font-size: 0.98rem;
+}
+
+.sub-nav .sub-link {
+  color: #6e7681;
+  margin: 0 16px;
+}
+
+.sub-nav .sub-link:hover {
+  color: var(--primary);
+}
+
+.container {
+  max-width: 1280px;          /* mais largo pra ficar bonito em desktop */
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.h2 {
+  display: block;
+  margin: 64px 0 32px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  padding-bottom: 12px;
+  border-bottom: 3px solid;
+  transition: color 0.2s;
+}
+
+.h2[href*="Fut"] { border-bottom-color: var(--accent-fut); }
+.h2[href*="UFC"] { border-bottom-color: var(--accent-ufc); }
+.h2[href*="f1"]  { border-bottom-color: var(--accent-f1);  }
+
+.h2:hover {
+  color: var(--primary);
+}
+
+.section {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 8px 0;             /* espaço interno sutil */
+  margin-bottom: 64px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+}
+
+.news-item {
+  padding: 28px 32px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s ease;
+}
+
+.news-item:last-child {
+  border-bottom: none;
+}
+
+.news-item:hover {
+  background: #1f2937;
+}
+
+.news-item h3 {
+  margin: 0 0 12px;
+  font-size: 1.42rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #fff;
+}
+
+.news-item h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.news-item h3 a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.news-item p {
+  margin: 0 0 14px;
+  font-size: 1.05rem;
+  color: var(--text-sec);
+}
+
+.source {
+  font-size: 0.92rem;
+  color: var(--gray);
+  margin-top: 10px;
+  display: block;
+}
+
+footer {
+  background: #010409;
+  text-align: center;
+  padding: 60px 24px;
+  color: #6e7681;
+  font-size: 0.95rem;
+  border-top: 1px solid var(--border);
+  margin-top: 80px;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  h1 { font-size: 2.6rem; }
+  .h2 { font-size: 1.9rem; margin: 48px 0 28px; }
+  .news-item { padding: 24px 28px; }
+  nav a { margin: 0 14px; font-size: 1rem; }
+  .container { padding: 0 16px; }
+}
+
+footer{
+background:#111;
+color:white;
+margin-top:40px;
+}
+
+.footer-container{
+display:flex;
+justify-content:space-between;
+flex-wrap:wrap;
+padding:40px 20px;
+gap:40px;
+}
+
+.footer-logo{
+max-width:320px;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.footer-logo img{
+width:120px;
+height:auto;
+}
+
+.footer-logo p{
+color:#ccc;
+font-size:14px;
+line-height:1.5;
+}
+
+.footer-links,
+.footer-social{
+display:flex;
+flex-direction:column;
+}
+
+.footer-links a,
+.footer-social a{
+color:#ddd;
+text-decoration:none;
+margin:5px 0;
+transition:0.3s;
+}
+
+.footer-links a:hover,
+.footer-social a:hover{
+color:#ff3b3b;
+}
+
+.footer-copy{
+text-align:center;
+padding:15px;
+background:#000;
+font-size:14px;
+}
+
+.ctt{
+position: fixed;
+bottom: 20px;
+right: 20px;
+background: linear-gradient(
+45deg,
+#f09433,
+#e6683c,
+#dc2743,
+#cc2366,
+#bc1888
+);
+color: white;
+padding: 10px 12px;
+border-radius: 50px;
+display: flex;
+align-items: center;
+cursor: pointer;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.insta{
+width: 28px;
+height: 28px;
+}

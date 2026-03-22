@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<title>WNN</title>
+</head>
+
+<body>
+
+<header>
+<h1 class="h1">WNN - World News Network</h1>
+<p id="data"></p>
+
+<script>
+const hoje = new Date();
+
+const dataFormatada = hoje.toLocaleDateString("pt-BR", {
+  weekday: "long",
+  day: "numeric",
+  month: "long",
+  year: "numeric"
+});
+document.getElementById("data").innerHTML = dataFormatada;
+</script>
+<nav>
+<a href="index.html">Inicio</a>
+<a href="esportes.html">Esportes</a>
+<a href="mundo.html">Mundo</a>
+</header>
+
+<!-- CARROSSEL DE MOEDAS -->
+
+<div class="carrossel">
+<div class="ticker" id="cotacoes">
+
+<span>Carregando moedas...</span>
+
+</div>
+</div>
+
+<section class="sobre-wnn">
+
+<h1>Sobre o WNN</h1>
+
+<p>
+O <strong>WNN (World News Network)</strong> é um site de notícias universais que reúne
+informações recentes de diversas áreas, como esportes, tecnologia, política,
+economia e acontecimentos importantes ao redor do mundo. O objetivo do site
+é permitir que o leitor acompanhe rapidamente os principais fatos do momento
+em um único lugar, sem precisar acessar vários portais diferentes.
+</p>
+
+<p>
+Para isso, o WNN utiliza um sistema de <strong>agregação de notícias</strong>,
+que reúne conteúdos publicados por diferentes veículos de comunicação.
+As notícias exibidas no site são organizadas automaticamente a partir de
+fontes públicas disponíveis na internet, permitindo que o leitor tenha
+acesso a uma visão ampla e atualizada dos acontecimentos globais.
+</p>
+
+<p>
+Além disso, o site respeita a origem das informações apresentadas.
+Cada notícia mantém sua fonte original e inclui um link que direciona
+o leitor para o portal que publicou a matéria completa. Essa prática é
+conhecida como <strong>atribuição de fonte</strong> ou <strong>crédito à fonte</strong>,
+e é utilizada para reconhecer o trabalho dos veículos jornalísticos
+responsáveis pela produção do conteúdo.
+</p>
+
+<p>
+Dessa forma, o WNN funciona como um <strong>agregador de notícias</strong>,
+facilitando o acesso à informação e permitindo que os leitores descubram
+conteúdos de diferentes sites de maneira prática, organizada e transparente.
+</p>
+
+</section>
+<h1>Ultimas Noticias</h1>
+<div class="noticias-mundo" id="noticias-esportes">
+   <script>
+      // SUBSTITUA o script da div #noticias-esportes por este (AGORA COM TUDO):
+
+const FEEDS = {
+    ufc: [
+        { url: 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.ufc.com/rss/news'), categoria: 'UFC' }
+    ],
+    f1: [
+        { url: 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.formula1.com/en/latest/rss/news'), categoria: 'F1' }
+    ],
+    futebol: [
+        { url: 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.uol.com.br/esporte/rss.xml'), categoria: 'Futebol' },
+        { url: 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.espn.com.br/rss/news'), categoria: 'Esportes' },
+        { url: 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.terra.com.br/esportes/rss.xml'), categoria: 'Esportes' }
+    ],
+    brasil: [
+        { url: 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://g1.globo.com/rss/g1/brasil/'), categoria: 'Brasil' }
+    ],
+    mundo: [
+        { url: 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://feeds.bbci.co.uk/portuguese/rss.xml'), categoria: 'Mundo' }
+    ]
+};
+
+async function fetchRSS(feedUrl) {
+    try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 10000); // 10s timeout
+        
+        const response = await fetch(feedUrl, { signal: controller.signal });
+        clearTimeout(timeout);
+        
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(data.contents, 'text/xml');
+        
+        // Verifica se tem erro de parsing
+        const parserError = xmlDoc.querySelector('parsererror');
+        if (parserError) throw new Error('Erro XML');
+        
+        return xmlDoc;
+    } catch (error) {
+        console.error('❌ Feed falhou:', feedUrl, error.message);
+        return null;
+    }
+}
+
+function parseRSS(xmlDoc) {
+    const items = xmlDoc.querySelectorAll('item, entry'); // Suporta RSS e Atom
+    const noticias = [];
+    
+    for (let i = 0; i < Math.min(items.length, 8); i++) { // 8 por feed agora
+        const item = items[i];
+        let title = item.querySelector('title')?.textContent?.trim() || 
+                   item.querySelector('entry > title')?.textContent?.trim() ||
+                   'Sem título';
+        
+        let link = item.querySelector('link')?.textContent?.trim() || 
+                  item.querySelector('link[type="text/html"]')?.getAttribute('href') ||
+                  '#';
+        
+        let description = item.querySelector('description')?.textContent || 
+                         item.querySelector('summary')?.textContent ||
+                         '';
+        
+        if (!title || title.length < 5) continue; // Pula títulos inválidos
+        
+        const resumo = description
+            .replace(/<[^>]*>/g, '')
+            .replace(/&[a-zA-Z0-9#]+;/g, ' ') // HTML entities
+            .replace(/\s+/g, ' ')
+            .trim()
+            .substring(0, 120) + '...';
+
+        noticias.push({ title, link, description: resumo });
+    }
+    return noticias;
+}
+
+function criarCard(noticia, categoria) {
+    return `
+        <div class="card-noticia">
+            <div class="categoria">${categoria}</div>
+            <h3>${noticia.title}</h3>
+            <p>${noticia.description}</p>
+            <a href="${noticia.link}" target="_blank" rel="noopener">Ler mais →</a>
+        </div>
+    `;
+}
+
+async function carregarTodasNoticias() {
+    const container = document.getElementById('noticias-esportes');
+    if (!container) {
+        console.error('Container não encontrado!');
+        return;
+    }
+    
+    container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#00ff88;font-size:18px;">🔄 Carregando todas as notícias (UFC, F1, Futebol, Brasil, Mundo)...</div>';
+    
+    const todasCategorias = ['ufc', 'f1', 'futebol', 'brasil', 'mundo'];
+    let html = '';
+    let total = 0;
+    let erros = 0;
+    
+    for (const categoria of todasCategorias) {
+        for (const feed of FEEDS[categoria]) {
+            try {
+                console.log(`📡 Carregando ${categoria}...`);
+                const xmlDoc = await fetchRSS(feed.url);
+                if (xmlDoc) {
+                    const noticias = parseRSS(xmlDoc);
+                    if (noticias.length > 0) {
+                        noticias.forEach(noticia => {
+                            html += criarCard(noticia, feed.categoria);
+                            total++;
+                        });
+                    }
+                }
+            } catch (e) {
+                erros++;
+                console.error(`❌ ${categoria} falhou:`, e.message);
+            }
+        }
+    }
+    
+    if (total > 0) {
+        container.innerHTML = html;
+        console.log(`✅ ${total} notícias carregadas! (${erros} feeds falharam)`);
+    } else {
+        container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#ff4444;font-size:16px;">❌ Nenhuma notícia carregada. Verifique conexão e tente atualizar F5.</div>';
+    }
+}
+
+// Inicialização + Auto-refresh
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', carregarTodasNoticias);
+} else {
+    carregarTodasNoticias();
+}
+setInterval(carregarTodasNoticias, 30 * 60 * 1000); // 30 minutos
+   </script>
+</div>
+
+
+
+<script>
+
+/* MOEDAS QUE SERÃO BUSCADAS */
+
+async function atualizarCotacoes(){
+
+try{
+
+const resposta = await fetch("https://open.er-api.com/v6/latest/BRL")
+const dados = await resposta.json()
+
+const taxas = dados.rates
+
+let html = ""
+
+html += `<span>Cotação em tempo real: Dólar (USD): R$ ${(1/taxas.USD).toFixed(2)}</span>`
+html += `<span>Euro (EUR): R$ ${(1/taxas.EUR).toFixed(2)}</span>`
+html += `<span>Libra (GBP): R$ ${(1/taxas.GBP).toFixed(2)}</span>`
+html += `<span>Iene (JPY): R$ ${(1/taxas.JPY).toFixed(2)}</span>`
+html += `<span>Dólar Canadense (CAD): R$ ${(1/taxas.CAD).toFixed(2)}</span>`
+html += `<span>Dólar Australiano (AUD): R$ ${(1/taxas.AUD).toFixed(2)}</span>`
+html += `<span>Franco Suíço (CHF): R$ ${(1/taxas.CHF).toFixed(2)}</span>`
+html += `<span>Yuan Chinês (CNY): R$ ${(1/taxas.CNY).toFixed(2)}</span>`
+html += `<span>Peso Argentino (ARS): R$ ${(1/taxas.ARS).toFixed(2)}</span>`
+html += `<span>Peso Mexicano (MXN): R$ ${(1/taxas.MXN).toFixed(2)}</span>`
+
+document.getElementById("cotacoes").innerHTML = html + html
+
+}catch(erro){
+
+document.getElementById("cotacoes").innerHTML =
+"<span>Erro ao carregar moedas</span>"
+
+}
+
+}
+
+atualizarCotacoes()
+setInterval(atualizarCotacoes,60000)
+</script>
+<div class="ctt">
+   <div class="ctt">
+<a href="https://www.instagram.com/wnnfatos/" target="_blank">
+<img src="insta.png" alt="Instagram" class="insta">
+    </div>
+</div>
+</body>
+</html>

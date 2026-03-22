@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formula 1</title>
+<link rel="stylesheet" href="f1.css">
+</head>
+
+<body>
+
+<header>
+
+<h1>Formula 1</h1>
+
+<nav>
+<a href="index.html">Inicio</a>
+<a href="esportes.html">Esportes</a>
+<a href="mundo.html">Mundo</a>
+</nav>
+
+<nav class="sub-nav">
+<a href="f1.html" class="sub-link">Formula 1</a>
+<a href="fut.html" class="sub-link">Futebol</a>
+<a href="ufc.html" class="sub-link">UFC</a>
+</nav>
+</header>
+
+<h1 class="titulo">Sobre a Fórmula 1</h1>
+
+<p class="esp">
+A temporada de Fórmula 1 é formada por várias corridas chamadas Grandes Prêmios, realizadas em diferentes países ao longo do ano. Cada corrida acontece em um circuito específico, que pode ser um autódromo permanente ou uma pista de rua montada temporariamente em cidades ao redor do mundo. Durante cada etapa, os pilotos acumulam pontos de acordo com suas posições de chegada, e ao final da temporada o piloto que tiver somado a maior quantidade de pontos é coroado campeão mundial da Fórmula 1. A Fórmula 1 é considerada um dos esportes mais emocionantes e populares do mundo, atraindo milhões de fãs em todo o planeta.
+</p>
+
+<div>
+
+<div class="texto">
+
+<p>
+A temporada de Fórmula 1 é formada por várias corridas chamadas Grandes Prêmios, realizadas em diferentes países ao longo do ano. Cada corrida acontece em um circuito específico, que pode ser um autódromo permanente ou uma pista de rua montada temporariamente em cidades ao redor do mundo. Durante cada etapa, os pilotos acumulam pontos de acordo com suas posições de chegada, e ao final da temporada o piloto que tiver somado a maior quantidade de pontos é coroado campeão mundial da Fórmula 1.
+</p>
+
+<p>
+A Fórmula 1 é conhecida por sua tecnologia avançada, com carros que são verdadeiras máquinas de alta performance. Os carros de F1 são projetados para serem leves, aerodinâmicos e extremamente rápidos, com motores potentes e sistemas de suspensão sofisticados. A competição é acirrada, com equipes investindo milhões de dólares em pesquisa e desenvolvimento para ganhar vantagem sobre os concorrentes.
+</p>
+
+<p>
+A Fórmula 1 também é famosa por seus pilotos extremamente talentosos e carismáticos, que muitas vezes se tornam verdadeiros ícones do esporte e referências para várias gerações de fãs. Ao longo das décadas, diversos pilotos marcaram profundamente a história da categoria com suas habilidades, conquistas e personalidades dentro e fora das pistas. Entre os nomes mais lembrados estão o brasileiro Ayrton Senna, conhecido por sua habilidade 
+</p>
+
+
+</div>
+
+</div>
+<p>excepcional na chuva e sua determinação nas corridas; o alemão Michael Schumacher, que dominou a Fórmula 1 no início dos anos 2000 e conquistou vários títulos mundiais; o britânico Lewis Hamilton, um dos pilotos mais vitoriosos da história da categoria; e o alemão Sebastian Vettel, que também marcou uma era com múltiplos campeonatos mundiais.</p>
+
+<p>
+Além do talento individual dos pilotos, a Fórmula 1 é marcada por rivalidades intensas que ajudam a construir algumas das histórias mais emocionantes do esporte. Disputas entre pilotos da mesma equipe ou de equipes diferentes frequentemente criam momentos de grande tensão nas pistas, ultrapassagens memoráveis e finais de corrida imprevisíveis. Essas rivalidades, somadas ao alto nível tecnológico dos carros e à estratégia das equipes durante as corridas, tornam cada temporada única e cheia de momentos marcantes que ficam gravados na memória dos fãs de automobilismo ao redor do mundo.
+</p>
+
+<p>
+A Fórmula 1 é um espetáculo global que combina velocidade, tecnologia e emoção, atraindo milhões de fãs em todo o mundo. Com corridas emocionantes, pilotos talentosos e equipes dedicadas, a F1 continua a ser uma das competições esportivas mais emocionantes e populares do planeta.
+</p>
+
+<section class="noticias-mundo">
+  <h1>Últimas Notícias</h1>
+  <div id="noticias-f1">
+    <!-- Cards de notícias serão inseridos aqui -->
+  </div>
+</section>
+
+<script>
+const noticiasF1 = [
+  { title: "Verstappen vence GP do Brasil", description: "Max Verstappen conquista mais uma vitória e se aproxima do título mundial.", url: "https://www.formula1.com/en/latest/article.verstappen-wins-brazilian-grand-prix-as-red-bull-dominates.1xG9kq1wML2r92gJ7KqfM7.html" },
+  { title: "Ferrari surpreende em Mônaco", description: "Leclerc e Sainz brilham nas ruas de Mônaco com estratégias ousadas.", url: "https://www.racefans.net/2026/05/24/ferrari-impresses-at-monaco-gp/" },
+  { title: "Mercedes testa novo motor", description: "A equipe alemã busca recuperar desempenho com atualização técnica.", url: "https://www.motorsport.com/f1/news/mercedes-new-engine-test/10345678/" },
+  { title: "GP da Austrália promete emoção", description: "Circuito de Melbourne deve receber fortes disputas na primeira volta.", url: "https://www.formula1.com/en/latest/article.australian-gp-preview-2026-expectations-and-drivers-to-watch.6xJH3v7KZg0R0o.html" },
+  { title: "Pneus Pirelli recebem críticas", description: "Pilotos reclamam da durabilidade dos pneus nesta temporada.", url: "https://www.motorsport.com/f1/news/pirelli-tyre-criticism-2026/10345999/" },
+  { title: "Red Bull domina treinos livres", description: "A equipe mostra velocidade superior nos treinos antes da corrida.", url: "https://www.racefans.net/2026/03/14/red-bull-dominates-practice-sessions/" },
+  { title: "Leclerc busca recuperação no campeonato", description: "O piloto da Ferrari precisa pontuar alto nas próximas corridas.", url: "https://www.formula1.com/en/latest/article.leclerc-targets-championship-comeback.4K3hJxPp9D9f0z.html" },
+  { title: "GP de Abu Dhabi define estratégias", description: "Última corrida da temporada promete surpresas táticas.", url: "https://www.motorsport.com/f1/news/abu-dhabi-strategy-preview-2026/10346021/" },
+  { title: "Alonso desafia jovens talentos", description: "Fernando Alonso impressiona pela experiência e consistência.", url: "https://www.formula1.com/en/latest/article.alonso-outshines-young-talent-in-2026-season.7kL2Qh9P0F1R.html" },
+  { title: "Novas regras aerodinâmicas entram em vigor", description: "Mudanças na asa traseira impactam o desempenho das equipes.", url: "https://www.racefans.net/2026/01/05/f1-aero-rule-changes-2026/" }
+];
+
+function atualizarNoticiasF1() {
+  const container = document.getElementById('noticias-f1');
+  container.innerHTML = ''; // Limpa notícias antigas
+
+  noticiasF1.forEach(noticia => {
+    const card = document.createElement('div');
+    card.classList.add('card-noticia');
+    card.innerHTML = `
+      <h3>${noticia.title}</h3>
+      <p>${noticia.description}</p>
+      <a href="${noticia.url}" target="_blank">Leia mais</a>
+    `;
+    container.appendChild(card);
+  });
+}
+
+// Atualiza automaticamente a cada 2 minutos
+atualizarNoticiasF1();
+setInterval(atualizarNoticiasF1, 120000);
+</script>
+
+
+</body>
+</html>

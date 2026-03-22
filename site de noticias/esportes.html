@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="esportes.css">
+
+<title>WNN</title>
+</head>
+
+<body>
+
+<header>
+
+<h1>WNN</h1>
+<p id="data"></p>
+
+<script>
+const hoje = new Date();
+
+const dataFormatada = hoje.toLocaleDateString("pt-BR", {
+  weekday: "long",
+  day: "numeric",
+  month: "long",
+  year: "numeric"
+});
+document.getElementById("data").innerHTML = dataFormatada;
+</script>
+
+<nav>
+<a href="index.html">Inicio</a>
+<a href="esportes.html">Esportes</a>
+<a href="mundo.html">Mundo</a>
+</nav>
+
+<nav class="sub-nav">
+<a href="f1.html" class="sub-link">Formula 1</a>
+<a href="fut.html" class="sub-link">Futebol</a>
+<a href="ufc.html" class="sub-link">UFC</a>
+</nav>
+
+</header>
+<section class="sobre-esportes">
+
+<h1>Sobre Esportes</h1>
+
+<p>
+Os <strong>esportes</strong> são atividades físicas ou competições organizadas que envolvem habilidade, estratégia, esforço físico e mental. Eles podem ser praticados individualmente ou em equipe, com o objetivo de desenvolver aptidões, promover saúde, entretenimento e interação social.
+</p>
+
+<p>
+Entre as modalidades mais populares estão o <strong>futebol</strong>, em que equipes buscam marcar gols conduzindo a bola até o gol adversário; o <strong>UFC</strong>, que reúne atletas de artes marciais mistas em combates estratégicos e físicos; e a <strong>Fórmula 1</strong>, categoria de automobilismo que combina velocidade, reflexos e trabalho em equipe para alcançar o melhor desempenho em circuitos ao redor do mundo.
+</p>
+
+<p>
+O WNN busca oferecer uma visão completa do universo esportivo, reunindo informações e notícias sobre diferentes modalidades e eventos, permitindo que o leitor acompanhe competições, resultados e curiosidades de forma rápida, prática e confiável.
+</p>
+
+</section>
+<h1>Ultimas Noticias</h1>
+<div class="noticias-mundo" id="noticias-esportes">
+<script>
+  // JS APENAS PARA ESPORTES (substitua o script da div #noticias-esportes)
+
+const FEEDS_ESPORTE = [
+    { url: 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.uol.com.br/esporte/rss.xml'), categoria: 'Futebol' },
+    { url: 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.espn.com.br/rss/news'), categoria: 'Esportes' },
+    { url: 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.terra.com.br/esportes/rss.xml'), categoria: 'Esportes' },
+    { url: 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.ufc.com/rss/news'), categoria: 'UFC' },
+    { url: 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.formula1.com/en/latest/rss/news'), categoria: 'F1' }
+];
+
+async function fetchRSS(feedUrl) {
+    try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 8000);
+        
+        const response = await fetch(feedUrl, { signal: controller.signal });
+        clearTimeout(timeout);
+        
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(data.contents, 'text/xml');
+        const parserError = xmlDoc.querySelector('parsererror');
+        if (parserError) throw new Error('XML inválido');
+        
+        return xmlDoc;
+    } catch (error) {
+        console.error('Feed falhou:', error.message);
+        return null;
+    }
+}
+
+function parseRSS(xmlDoc) {
+    const items = xmlDoc.querySelectorAll('item, entry');
+    const noticias = [];
+    
+    for (let i = 0; i < Math.min(items.length, 10); i++) {
+        const item = items[i];
+        let title = item.querySelector('title')?.textContent?.trim() || 'Sem título';
+        let link = item.querySelector('link')?.textContent?.trim() || 
+                  item.querySelector('link[type="text/html"]')?.getAttribute('href') || '#';
+        let description = item.querySelector('description, summary')?.textContent || '';
+        
+        if (title.length < 5) continue;
+        
+        const resumo = description
+            .replace(/<[^>]*>/g, '')
+            .replace(/&[a-zA-Z0-9#]+;/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim()
+            .substring(0, 120) + '...';
+
+        noticias.push({ title, link, description: resumo });
+    }
+    return noticias;
+}
+
+function criarCard(noticia, categoria) {
+    return `
+        <div class="card-noticia">
+            <div class="categoria">${categoria}</div>
+            <h3>${noticia.title}</h3>
+            <p>${noticia.description}</p>
+            <a href="${noticia.link}" target="_blank" rel="noopener">Ler mais →</a>
+        </div>
+    `;
+}
+
+async function carregarEsportes() {
+    const container = document.getElementById('noticias-esportes');
+    if (!container) return;
+    
+    container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#00ff88;font-size:18px;">⚽🔥 Carregando notícias de esportes...</div>';
+    
+    let html = '';
+    let total = 0;
+    
+    for (const feed of FEEDS_ESPORTE) {
+        try {
+            console.log(`📡 ${feed.categoria}...`);
+            const xmlDoc = await fetchRSS(feed.url);
+            if (xmlDoc) {
+                const noticias = parseRSS(xmlDoc);
+                noticias.forEach(noticia => {
+                    html += criarCard(noticia, feed.categoria);
+                    total++;
+                });
+            }
+        } catch (e) {
+            console.error(`❌ ${feed.categoria}:`, e.message);
+        }
+    }
+    
+    container.innerHTML = total > 0 ? html : 
+        '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#ff4444;">❌ Erro ao carregar esportes. F5 para tentar novamente.</div>';
+    
+    console.log(`⚽ ${total} notícias esportivas carregadas!`);
+}
+
+// Carrega agora + atualiza a cada 30min
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', carregarEsportes);
+} else {
+    carregarEsportes();
+}
+setInterval(carregarEsportes, 30 * 60 * 1000);
+</script>
+
+
+<footer>
+
+<div class="footer-container">
+
+<div class="footer-logo">
+<img src="logo-wnn.png" alt="WNN">
+<p>World News Network - notícias atualizadas sobre esportes, tecnologia e acontecimentos do mundo.</p>
+</div>
+
+<div class="footer-links">
+<h3>Navegação</h3>
+<a href="#">Início</a>
+<a href="#">Esportes</a>
+<a href="../mundo/mundo.html">Mundo</a>
+<a href="https://web.whatsapp.com" target="_blank">Contato</a>
+</div>
+
+<div class="footer-social">
+<h3>Redes</h3>
+<a href="https://www.instagram.com/wnnfatos/" target="_blank">Instagram</a>
+<a href="https://web.whatsapp.com" target="_blank">Whatsapp</a>
+<a href="#">YouTube</a>
+</div>
+
+</div>
+
+<div class="ctt">
+   <div class="ctt">
+        <a href="https://www.instagram.com/wnnfatos/" target="_blank">
+        <img src="insta.png" alt="Instagram" class="insta">
+    </div>
+</div>
+<div class="footer-copy">
+<p>© 2026 WNN - Todos os direitos reservados</p>
+</div>
+
+</footer>

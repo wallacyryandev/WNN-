@@ -1,0 +1,139 @@
+/* esportes.css - versão bonita, moderna e clean dark mode 2026 */
+
+:root {
+  --bg: #0c1117;              /* cinza-escuro suave, confortável */
+  --card-bg: #161b22;
+  --text: #c9d1d9;
+  --text-sec: #8b949e;
+  --border: #30363d;
+  --primary: #f85149;         /* vermelho vivo bonito para hover/chamadas */
+  --gray: #6e7681;
+  --accent-fut: #39d353;      /* verde futebol */
+  --accent-ufc: #f0883e;      /* laranja UFC */
+  --accent-f1: #58a6ff;       /* azul F1 */
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 1rem;
+}
+
+header {
+  background: #010409;
+  padding: 32px 0 24px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.h1 {
+  margin: 0;
+
+  font-weight: 800;
+  color: black;
+  letter-spacing: -1px;
+  text-align: center;
+}
+
+#data {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    text-transform: capitalize;
+    color: white;
+    background-color: #010409;
+    padding: 8px 14px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+nav {
+  margin: 20px 0;
+}
+
+nav a {
+  color: #8b949e;
+  text-decoration: none;
+  margin: 0 20px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+.sub-nav {
+  margin: 12px 0;
+  font-size: 0.98rem;
+}
+
+.sub-nav .sub-link {
+  color: #6e7681;
+  margin: 0 16px;
+}
+
+.sub-nav .sub-link:hover {
+  color: var(--primary);
+}
+
+.titulo{
+    text-align: center;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.text{
+padding:15px;
+line-height:1.6;
+overflow:auto;
+}
+
+.fut{
+float:right;
+width:320px;
+top: 0%;
+margin:10px 0 10px 20px;
+border-radius:8px;
+}
+
+.Jogadores{
+display:flex;
+flex-wrap:nowrap;
+gap:30px;
+overflow-x:auto;
+overflow-y:hidden;
+padding:20px;
+}
+
+.cdb{
+min-width:280px;
+background:white;
+border-radius:10px;
+padding:15px;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+.cdb img{
+width:100%;
+border-radius:8px;
+}
+
+.titulo{
+margin-left:20px;
+}
+
+ .Jogadores p{
+    color: black;
+}
+h1 {
+  margin: 0;
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -1px;
+}

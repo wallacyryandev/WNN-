@@ -1,0 +1,142 @@
+/* esportes.css - versão bonita, moderna e clean dark mode 2026 */
+
+:root {
+  --bg: #0c1117;              /* cinza-escuro suave, confortável */
+  --card-bg: #161b22;
+  --text: #c9d1d9;
+  --text-sec: #8b949e;
+  --border: #30363d;
+  --primary: #f85149;         /* vermelho vivo bonito para hover/chamadas */
+  --gray: #6e7681;
+  --accent-fut: #39d353;      /* verde futebol */
+  --accent-ufc: #f0883e;      /* laranja UFC */
+  --accent-f1: #58a6ff;       /* azul F1 */
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 1rem;
+}
+
+header {
+  background: #010409;
+  padding: 32px 0 24px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.h1 {
+
+  color: black;
+}
+
+h1 {
+  margin: 0;
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -1px;
+  text-align: center;
+}
+
+nav {
+  margin: 20px 0;
+}
+
+nav a {
+  color: #8b949e;
+  text-decoration: none;
+  margin: 0 20px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+.sub-nav {
+  margin: 12px 0;
+  font-size: 0.98rem;
+}
+
+.sub-nav .sub-link {
+  color: #6e7681;
+  margin: 0 16px;
+}
+
+.sub-nav .sub-link:hover {
+  color: var(--primary);
+}
+
+
+.cabeçario-do-site {
+    max-width: 500px;
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease;
+}
+
+.cabeçario-do-site:hover {
+    transform: translateY(-60%) scale(1.1);
+}
+
+.center {
+    text-align: center;
+
+}
+
+p{
+    max-width: 900px;
+    margin: 20px auto;
+    font-size: 18px;
+    text-align: justify;
+    text-indent: 40px;
+    padding: 15px 20px;
+    border-radius: 8px;
+}
+
+.lutadores{
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    color: black;
+    margin-top: 40px;
+}
+
+.cdb, .jj{
+    width: 280px;
+    background-color: white;
+    border-radius: 10px;
+    color: black;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.cdb img, .jj img{
+    width: 100%;
+    border-radius: 8px;
+}
+
+.cdb h2, .jj h2{
+    margin-top: 10px;
+}
+
+.cdb p, .jj p{
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.cdb:hover, .jj:hover{
+    transform: scale(1.05);
+    transition: 0.3s;
+}
